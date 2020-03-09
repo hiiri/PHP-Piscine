@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Basics
+	</title>
+	<style>
+		#bigtitle {
+			color:white; text-align:center; font-size: 10vh;
+		}
+		/* #top-padding {
+			margin-top: 1vh;
+			position: relative;
+		} */
+		.row {
+			display:flex;
+			width: 95vw;
+		}
+		.column {
+			flex:25%;
+			padding:0px;
+			justify-content: space-evenly;
+			height: 50vh;
+		}
+		img {
+			padding-left: 10vw;
+			height: 10vh;
+			width: auto;
+			max-width: 30vh;
+		}
+		a {
+			padding-left: 10vw;
+			font-size: 2vw;
+			text-align: center;
+		}
+		#footer {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+
+		}
+		hr {
+			margin-top: 300px;
+			border: 1px solid black;
+		}
+		#copyright {
+			text-align: right;
+			font-family: monospace;
+			font-style: italic;
+			padding-right: 5px;
+		}
+	</style>
+</head>
+
+<body style='background-color:pink;'>
+<div id="top-padding">
+</div>
+	<h1 id="bigtitle">H&eacute;llo my friends</h1>
+	<div>
+		<div class="row">
+			<div class="column">
+				<img src="https://images.jimms.fi/jimms/logo_trans.png" alt="Jimms logo" width="150" height="100"></img></br>
+				<a href="https://www.jimms.fi">Jimms</a></br>
+			</div>
+			<div class="column">
+				<img src="https://upload.wikimedia.org/wikipedia/fi/4/42/Verkkokauppa.com_logo.svg" alt="Verkkokauppa.com logo" width="400" height="100"></img></br>
+				<a href="https://www.verkkokauppa.com">Verkkokauppa.com</a></br>
+			</div>
+		</div>
+	</div>
+		<div id="footer">
+			<hr>
+			<p id="copyright">&copy; alcohen 2020</p>
+		</div>
+</body>
+</html>
