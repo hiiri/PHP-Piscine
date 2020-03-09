@@ -2,7 +2,12 @@ body {
 	background-color: rgb(80, 80, 80);
 }
 
-.header-box {
+.box-shadow {
+	border-radius: 10px;
+	box-shadow: 9px 9px 7px 1px rgba(15,15,15,1);
+}
+
+#header-box {
 	width: 900px;
 	height: 100px;
 	border: rgb(144, 144, 144);
@@ -14,3 +19,27 @@ body {
 	top: 10px;
 	}
 
+#cluster-img {
+	border: solid 10px rgb(144, 144, 144);
+	position: relative;
+	top: 15px;
+	width: 600px;
+}
+
+#cluster-box {
+	width: 600px;
+	padding: 15px;
+	margin: 0 auto;
+
+	top: 10px;
+}
+
+#link-box {
+	z-index: 1;
+	background-color: rgb(255, 144, 144, 0.4);
+	width: 80px;
+	height: 130px;
+	position: fixed;
+	top: 375px;
+	left: 480px;
+}
