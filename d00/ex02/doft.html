@@ -5,18 +5,40 @@
 		<link rel="stylesheet" type="text/css" href="doft.css">
 	</head>
 	<body>
-		<div class="box-shadow" id="header-box">
-			<img src="resources/day_of_the_42.png" alt="Day of the 42" height="100px" width="380px">
+		<div class="box" class="box-shadow" id="header-box">
+			<img id="header-img" src="resources/day_of_the_42.png" alt="Day of the 42" height="100px" width="380px">
+			<img id="loupe" src="resources/loupe.png"></img>
+			<a href="https://www.disney.com"><img id="reload" src="resources/reload.png" title="Start from the beginning" alt="Start from the beginning"></img></a>
+			<a href="https://www.relaischateaux.com"><img id="close" src="resources/close.gif" title="Disconnect" alt="Disconnect" ></img></a>
 		</div>
-
-		<div id="cluster-box">
-
-			<img id="cluster-img" class="box-shadow" src="resources/cluster.jpg" usemap="#cluster-map">
-			<map name="cluster-map">
-				<!-- <area coords="5,5,331,674"  shape="rect" href="https://www.ikea.com"> -->
-				<area shape="rect" coords="1204,678,1206,680" href="https://www.apple.com">
-			</map>
-
+		<div class="container">
+			<div class="box" id="left-box">
+				<img title="Move" alt="Move" src="resources/arrow.png"></img>
+				<img title="Take" alt="Take" src="resources/main.png"></img>
+				<img title="Look" alt="Look" id="eye" src="resources/oeil.png"></img>
+				<img title="Use" alt="Use" src="resources/outil.png"></img>
+				<img title="Speak" alt="Speak" src="resources/chat-icon.png"></img>
+			</div>
+			<div class="box" id="cluster-box" class="box-shadow">
+				<img id="cluster-img" alt="Cluster image" src="resources/cluster.jpg" usemap="#cluster-map">
+				<map name="cluster-map">
+					<area shape="rect" coords="390,410,540,700" href="http://www.ikea.com">
+					<area shape="rect" coords="980,390,1240,570" href="http://apple.com">
+				</map>
+			</div>
+			<div class="box" id="right-box">
+				<img title="Instructions" alt="Instructions" width="100px" src="resources/book.png"></img>
+				<img title="Towel" alt="Towel" width="100px" src="resources/towel.png"></img>
+				<div title="Wall" alt="Wall" id="tiles"></div>
+				</div>
+			</div>
+			<div id="green-box">
+				<p id="text">Vous <b>entrez</b> alors dans une grande piece remplie
+				<br />d'<shadow>ordinateurs</shadow>...<br />
+				- <i id="italic">Bonjour, vous êtes nouveau ici ?</i>
+				</p>
+				<input id="form" type="text">   <input id="button" type="submit" value="Repondre"></form>
+			</div>
 		</div>
 	</body>
 </html>
