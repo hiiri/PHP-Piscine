@@ -10,27 +10,36 @@ function ft_split($str)
 	return ($arr);
 }
 
-function ft_sort_comparison($a, $b)
+function ft_comparison($a, $b)
 {
+    $shortest_len = (strlen($a) > strlen($b)) ? strlen($b) : strlen($a);
+
+	# Make case insensitive
 	$a = strtolower($a);
 	$b = strtolower($b);
-	$a_len = strlen($a);
-	$b_len = strlen($b);
 
-	$i = 0;
-	while ($i < $a_len - 1 && $i < $b_len - 1 && $a[$i] == $b[$i])
-		$i++;
-	$a_ascii = ord($a[$i]);
-	$b_ascii = ord($b[$i]);
-	if (!ctype_alpha($a[$i]))
-		$a_ascii += 1000;
-	if (!ctype_alnum($a[$i]))
-		$a_ascii += 2000;
-	if (!ctype_alpha($b[$i]))
-		$b_ascii += 1000;
-	if (!ctype_alnum($b[$i]))
-		$b_ascii += 2000;
-	return($a_ascii - $b_ascii);
+	for ($i = 0; $i < $shortest_len; $i++)
+		if ($a[$i] != $b[$i])
+			break;
+
+
+	$a_char = ($i == strlen($a)) ? chr(0) : $a[$i];
+    $b_char = ($i == strlen($b)) ? chr(0) : $b[$i];
+
+	# Compare first differing character
+	$a_value = ord($a_char);
+	$b_value = ord($b_char);
+    if ($a_value == 0 || $b_value == 0)
+        return ($a_value - $b_value);
+    if (!ctype_alpha($a_char))
+        $a_value += 1000;
+    if (!ctype_alnum($a_char))
+        $a_value += 2000;
+    if (!ctype_alpha($b_char))
+        $b_value += 1000;
+    if (!ctype_alnum($b_char))
+        $b_value += 2000;
+    return ($a_value - $b_value);
 }
 
 if ($argc != 1)
@@ -48,7 +57,7 @@ if ($argc != 1)
 		foreach($cur as $word)
 			array_push($arr, $word);
 	}
-	usort($arr, 'ft_sort_comparison');
+	usort($arr, 'ft_comparison');
 	foreach($arr as $elem)
 	{
 		echo "$elem\n";
