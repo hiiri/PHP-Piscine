@@ -59,6 +59,10 @@ if ($argc == 2)
 		$num1 = $arr[0];
 		$op = $arr[1];
 		$num2 = $arr[2];
+		if ($num2[0] == '+')
+			$num2 = ltrim($num2, "+");
+		else if ($num2[0] == '-')
+			$num2 = " " . $num2;
 		$res = eval('return '.$num1.$op.$num2.';');
 		print "$res\n";
 	}
