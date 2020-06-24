@@ -7,6 +7,10 @@ function replace_accents($str) {
 	return html_entity_decode($str);
 }
 
+function validate_date($date) {
+
+}
+
 setlocale(LC_ALL, 'fr_FR');
 header('Content-Type: text/html; charset=ISO-8859-1');
 date_default_timezone_set('Europe/Paris');
@@ -36,7 +40,7 @@ if ($argc != 1)
 	$date_arr = implode("-", $copy);
 	$formatted = $date_arr." ".$time;
 
-	if ($formatted == " ")
+	if (strtotime($formatted) === FALSE)
 		echo "Wrong Format\n";
 	else
 	{
