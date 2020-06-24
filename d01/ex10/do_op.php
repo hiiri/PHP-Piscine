@@ -11,9 +11,6 @@ function ft_split($str)
 
 if ($argc == 4)
 {
-	$first = true;
-	$arr = array();
-
 	$num1 = ft_split($argv[1])[0];
 	$operation = ft_split($argv[2])[0];
 	$num2 = ft_split($argv[3])[0];
@@ -25,5 +22,4 @@ else
 {
 	echo "Incorrect Parameters\n";
 }
-
 ?>
