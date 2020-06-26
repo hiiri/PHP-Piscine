@@ -1,23 +1,37 @@
 <?php
 
-session_start();
+$passwd_path = '../private/passwd';
 
-if ($_GET['login'] && $_GET['passwd'] && $_GET['passwd'] !== "")
+if ($_POST['passwd'] && $_POST['passwd'] !== "" && $_POST['submit'] == "OK")
 {
-	$_SESSION['login'] = $_GET['login'];
-	$_SESSION['passwd'] = $_GET['passwd'];
-	if (!file_exists('/private/passwd'))
+
+	if (!file_exists($passwd_path))
 	{
-		mkdir("/private/");
-		
+		mkdir("../private/", 0777); # maybe change this to 0600
 	}
+	$data = unserialize(file_get_contents($passwd_path));
+	if ($data)
+	{
+		foreach ($data as $user)
+		{
+			if ($user['login'] === $_POST['login'])
+			{
+				echo "ERROR\n";
+				return;
+			}
+		}
+	}
+	$data[] = array(
+		"login" => $_POST['login'], "passwd" => hash('sha512', $_POST['passwd'])
+	);
+
+	$serialized = serialize($data);
+	#print_r(unserialize($serialized));
+	file_put_contents($passwd_path, $serialized);
+	echo "OK\n";
 }
 else
 {
 	echo "ERROR\n";
 }
-
-#$login = $_SESSION['login'];
-#$passwd = $_SESSION['passwd'];
-
 ?>
