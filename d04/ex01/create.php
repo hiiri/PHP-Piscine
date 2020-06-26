@@ -21,9 +21,9 @@ if ($_POST['passwd'] && $_POST['passwd'] !== "" && $_POST['submit'] == "OK")
 			}
 		}
 	}
-	$data[] = array(
+	$data[] = [
 		"login" => $_POST['login'], "passwd" => hash('sha512', $_POST['passwd'])
-	);
+	];
 
 	$serialized = serialize($data);
 	file_put_contents($passwd_path, $serialized);
