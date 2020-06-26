@@ -6,37 +6,33 @@ $user_exists = FALSE;
 
 if ($_POST['newpw'] && $_POST['submit'] == "OK")
 {
-	if (!file_exists($passwd_path))
+	$data = unserialize(file_get_contents($passwd_path));
+	if (!$data)
 	{
 		echo "ERROR\n";
 		return;
 	}
-	$data = unserialize(file_get_contents($passwd_path));
-
-	if ($data)
+	foreach ($data as &$user)
 	{
-		foreach ($data as &$user)
+		if ($user['login'] === $_POST['login'])
 		{
-			if ($user['login'] === $_POST['login'])
+			$user_exists = TRUE;
+			if ($user['passwd'] === hash($hash_algorithm, $_POST['oldpw']))
 			{
-				$user_exists = TRUE;
-				if ($user['passwd'] === hash($hash_algorithm, $_POST['oldpw']))
-				{
-					$user['passwd'] = hash($hash_algorithm, $_POST['newpw']);
-					break;
-				}
-				else
-				{
-					echo "ERROR\n";
-					return;
-				}
+				$user['passwd'] = hash($hash_algorithm, $_POST['newpw']);
+				break;
+			}
+			else
+			{
+				echo "ERROR\n";
+				return;
 			}
 		}
-		if ($user_exists === FALSE)
-		{
-			echo "ERROR\n";
-			return;
-		}
+	}
+	if ($user_exists === FALSE)
+	{
+		echo "ERROR\n";
+		return;
 	}
 	$serialized = serialize($data);
 	file_put_contents($passwd_path, $serialized);
