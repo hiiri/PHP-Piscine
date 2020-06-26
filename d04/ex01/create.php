@@ -26,7 +26,6 @@ if ($_POST['passwd'] && $_POST['passwd'] !== "" && $_POST['submit'] == "OK")
 	);
 
 	$serialized = serialize($data);
-	#print_r(unserialize($serialized));
 	file_put_contents($passwd_path, $serialized);
 	echo "OK\n";
 }
