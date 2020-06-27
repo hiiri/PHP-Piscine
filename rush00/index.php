@@ -1,11 +1,11 @@
 <?php
     
 session_start();
-
+include('functions.php');
 # Data management
 
 # User management
-    $username = $_SESSION['logged_on_user'];
+    
 # Basket
 
 # Categories and products
@@ -24,7 +24,8 @@ session_start();
     
         </br></br>
     <?php
-        if (empty($username)) 
+    
+        if (!is_logged_in()) 
         {
             # user is not logged in
             # show login and register forms
@@ -54,6 +55,7 @@ session_start();
         else 
         {
             # user is logged in
+            $username = $_SESSION['logged_on_user'];
             echo "<p>Hello $username.</p>";
             
             echo '<div id="logout">';
@@ -135,5 +137,26 @@ session_start();
                 </ul>
             </li>
         </ul>
-</body>
+
+    <div>
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+            <button value="Add to basket">Add to basket</button>
+        </form>
+    </div>
+
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $item = $_POST['item'];
+            if (!empty($item)) {
+                if (add_to_basket('item')) {
+                    echo $item.' has been added to your basket.';
+                }
+                else {
+                    echo "Error: Adding to basket failed.";
+                }
+        }
+    }
+    ?>
+
+    </body>
 </html>
