@@ -1,4 +1,15 @@
-#shop-name {font-weight: bold;}
+#shop-name > a {
+    color: black;
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 30px;
+}
+
+h2 {
+    position: absolute;
+    left: 50px;
+    top: 130px;
+}
 
 body {
     background-color: rgb(238, 238, 238);
@@ -13,13 +24,37 @@ body {
     justify-content: space-between;
     width: 800px;
 }
-
 #login-form {
     width: 250px;
 }
 
-#register-form {
-    width: 250px;
+.product-list {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: wrap;              /* default value; can be omitted */
+    pointer-events: none;
+    padding-top: 150px;
+    margin: 20px;
+    width: 900px;
+    position: absolute;
+    left: 250px;
+    top:100px;
+    border: 4px black;
+}
+
+img {
+    max-width:100%;
+    max-height:100%;
+    border: 2px solid gray;
+}
+
+.product-list > div {
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+}
+.product-box button {
+
 }
 
 #nav {

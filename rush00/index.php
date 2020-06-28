@@ -2,6 +2,7 @@
     
 session_start();
 include('functions.php');
+include_once 'connect.php';
 # Data management
 
 # User management
@@ -9,6 +10,8 @@ include('functions.php');
 # Basket
 
 # Categories and products
+
+# Admin section
 
 ?>
 
@@ -20,7 +23,7 @@ include('functions.php');
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p id="shop-name">ft_minishop</p>
+    <p id="shop-name"><a href=".">ft_minishop</a></p>
     
         </br></br>
     <?php
@@ -40,16 +43,7 @@ include('functions.php');
                 </form>
             <?php
             echo '</div>';
-            echo '<div id="register-form">Register';
-            ?>
-                <form action="register.php" method="POST">
-                    Username: <input type="text" id="login" name="login" value="" />
-                    <br />
-                    Password: <input type="text" id="passwd" name="passwd" value="" />
-                    <input type="submit" name="submit" value="OK" />
-                </form>
-            <?php
-            echo '</div>';
+            echo '<a style="display:inline-table;" href="register.html">Register</a>';
             echo '</div>';
         }
         else 
@@ -67,96 +61,53 @@ include('functions.php');
             echo '</div>';
         }
     ?>
+    <div id="menu">
     <ul id="nav">
             <li><a href="#">Menu 1</a>
                 <ul>
-                    <li><a href="https://google.com">Item 1</a></li>
-                    <li><a href="https://google.com">Item 2</a></li>
-                    <li><a href="https://google.com">Item 3</a></li>
-                    <li><a href="https://google.com">Item 4</a></li>
-                </ul>
-            </li>
+                    <?php
+                    /* Get categories from database */
+                        #$query = "SELECT * FROM CATEGORY ORDER by CATEGORY_ID";
+                        #$categories = mysqli_query($conn, $query);
 
-            <li><a href="#">Menu 2</a>
-                <ul>
-                    <li><a href="https://google.com">Item 1</a></li>
-                    <li><a href="https://google.com">Item 2</a></li>
-                    <li><a href="https://google.com">Item 3</a></li>
-                    <li><a href="https://google.com">Item 4</a></li>
-                </ul>
-            </li>
-
-            <li><a href="#">Menu 3</a>
-                <ul>
-                    <li><a href="https://google.com">Item 1</a></li>
-                    <li><a href="https://google.com">Item 2</a></li>
-                    <li><a href="https://google.com">Item 3</a></li>
-                    <li><a href="https://google.com">Item 4</a></li>
-                </ul>
-            </li>
-
-            <li><a href="#">Menu 4</a>
-                <ul>
-                    <li><a href="https://google.com">Item 1</a></li>
-                    <li><a href="https://google.com">Item 2</a></li>
-                    <li><a href="https://google.com">Item 3</a></li>
-                    <li><a href="https://google.com">Item 4</a></li>
-                    <li>Submenu item
-                    <ul>
-                        <li><a href="https://google.com">Menu item 1</a>
-                        <li><a href="https://google.com">Menu item 2</a>
-                        <li><a href="https://google.com">Menu item 3</a>
-                        <li><a href="https://google.com">Menu item 4</a>
-                    </ul>
-                    </li>
-                </ul>
-            </li>
-
-            <li><a href="#">Menu 5</a>
-                <ul>
-                    <li><a href="https://google.com">Item 1</a></li>
-                    <li><a href="https://google.com">Item 2</a></li>
-                    <li><a href="https://google.com">Item 3</a></li>
-                    <li><a href="https://google.com">Item 4</a></li>
-                    <li>Submenu item
-                    <ul>
-                        <li><a href="https://google.com">Menu item 1</a>
-                        <li><a href="https://google.com">Menu item 2</a>
-                        <li><a href="https://google.com">Menu item 3</a>
-                        <li><a href="https://google.com">Menu item 4</a>
-                            <li>Submenu item
-                                <ul>
-                                    <li><a href="https://google.com">Menu item 1</a>
-                                    <li><a href="https://google.com">Menu item 2</a>
-                                    <li><a href="https://google.com">Menu item 3</a>
-                                    <li><a href="https://google.com">Menu item 4</a>
-                                </ul>
-                                </li>
-                    </ul>
-                    </li>
+                        $categories = ['Mice', 'Tools', 'Keyboards'];
+                        echo '<li><a href="."</a><b>All</b></li>';
+                        foreach ($categories as $category)
+                        {
+                            echo '<li><a href="?category='.trim(strtolower($category)).'">'.$category.'</a></li>';
+                        }
+                    ?>   
                 </ul>
             </li>
         </ul>
-
-    <div>
-        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-            <button value="Add to basket">Add to basket</button>
-        </form>
     </div>
-
     <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $item = $_POST['item'];
-            if (!empty($item)) {
-                if (add_to_basket('item')) {
-                    echo $item.' has been added to your basket.';
-                }
-                else {
-                    echo "Error: Adding to basket failed.";
-                }
-        }
-    }
+        /* Get all products from database */
+        $query = "SELECT * FROM PRODUCT ORDER by PRODUCT_ID";
+        $items = mysqli_query($conn, $query);
     ?>
-
+    <div class="product-list">
+        <?php
+            if (isset($_GET["category"]))
+                $selected_category = strtolower(trim(htmlspecialchars($_GET["category"])));
+            else
+                $selected_category = 'all';
+            echo '<h2>'.ucfirst($_GET["category"]).'</h2>';
+            foreach ($items as $item)
+            {
+                $item_category = strtolower(trim($item['CATEGORY']));
+                if ($selected_category !== 'all' && $item_category !== $selected_category)
+                    continue;
+                echo 
+                '<div class="product-box">',
+                    '<img src="./images/hammer.jpeg" alt="'.$item['NAME'].'">',
+                    '<p>'.$item['NAME']." ".$item['PRICE'].'€</p>',
+                    '<form action="'.$_SERVER['PHP_SELF'].'" method="POST">',
+                        '<button value="Add to basket">Add to basket</button>',
+                    '</form>',
+                '</div>';
+            }
+        ?>
+    </div>
     </body>
 </html>

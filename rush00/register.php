@@ -1,42 +1,35 @@
 <?php
+	include 'connect.php';
 
-session_start();
+	$username = $_POST['username'];
+	$password = hash('whirlpool', $_POST['password']);
+	$realname = $_POST['realname'];
+	$email = $_POST['email'];
 
-$passwd_path = '../private/passwd';
+	/*
+	if (!isset($_SESSION['logged_in_user'])) {
+		
+		header("Location: google.com");
+		die;
+	}*/
 
-if ($_POST['passwd'] && $_POST['passwd'] !== "" && $_POST['submit'] == "OK")
-{
-
-	if (!file_exists($passwd_path))
-	{
-		mkdir("../private/", 0777);
-	}
-	$data = unserialize(file_get_contents($passwd_path));
-	if ($data)
-	{
-		foreach ($data as $user)
-		{
-			if ($user['login'] === $_POST['login'])
-			{
-				echo '<p>Username <i>'.$_POST['login'].'</i> is already taken.</p>';
-				echo 	'</ br>',
-						'<a href=index.php>Return to the main page</a>';
-				return;
-			}
+	$sql = mysqli_query($conn, "SELECT * FROM `user`");
+	while ($row = mysqli_fetch_array($sql)) {
+		if ($row['username'] == $username) {
+			echo "Username is already in use";
+			die;
 		}
 	}
-	$data[] = [
-		"login" => $_POST['login'], "passwd" => hash('sha512', $_POST['passwd'])
-	];
-
-	$serialized = serialize($data);
-	file_put_contents($passwd_path, $serialized);
-	echo '<p>User <i>'.$_POST['login'].'</i> created. You can now log in.</p>';
-}
-else
-{
-	echo "<p>Password cannot be empty.</p>";
-}
-echo 	'</ br>',
-		'<a href=index.php>Return to the main page</a>';
+	
+	$sql = "INSERT INTO `user` (username, password, realname, email) VALUES ('$username', 'asdf', '$realname', '$email')";
+	if ($conn->query($sql) === TRUE) {
+		echo "New record created successfully";
+	//	$_SESSION['logged_in_user'] = $login;
+		echo "OK\n";
+		header('Location: index.php');
+	}
+	else
+	{
+		echo "ERROR\n";
+	}
 ?>

@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    
+
     function is_logged_in()
     {
         $username = $_SESSION['logged_on_user'];
