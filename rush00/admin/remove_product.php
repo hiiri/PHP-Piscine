@@ -17,21 +17,18 @@
 <?php
 	include '../connect.php';
 
-	$name = $_POST['name'];
-	$description  = $_POST['description'];
-	$price = $_POST['price'];
-	$category = $_POST['category'];
+	$product_id = $_GET['product_id'];
 
+    /*
 	$sql = mysqli_query($conn, "SELECT * FROM `product`");
 	while ($row = mysqli_fetch_array($sql)) {
 		if ($row['name'] == $name) {
 			echo "Productname is already in use";
 			die;
 		}
-	}
+	}*/
 	
-	$sql = "INSERT INTO `product` (name, description, price, category) VALUES ('$name', '$description', '$price', '$category')";
-	echo "$sql";
+	$sql = "DELETE FROM `product` WHERE product_id='$product_id'";
 	if ($conn->query($sql) === TRUE) {
 		echo "New record created successfully";
 		header('Location: list_products.php');

@@ -21,7 +21,7 @@
 		}
 	}
 	
-	$sql = "INSERT INTO `user` (username, password, realname, email) VALUES ('$username', 'asdf', '$realname', '$email')";
+	$sql = "INSERT INTO `user` (username, password, realname, email) VALUES ('$username', '$password', '$realname', '$email')";
 	if ($conn->query($sql) === TRUE) {
 		echo "New record created successfully";
 	//	$_SESSION['logged_in_user'] = $login;

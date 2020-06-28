@@ -11,25 +11,29 @@
 	<ul>
 		<li><a href="list_users.php">Users</a></li>
 		<li><a href="list_orders.php">Orders</a></li>
-		<li><a class="active" href="list_products.php">Products</a></li>
-		<li><a href="edit_categories.php">Categories</a></li>
+		<li><a href="list_products.php">Products</a></li>
+		<li><a class="active" href="edit_categories.php">Categories</a></li>
 	  </ul>
-	<form action="add_product.php" method="POST" style="border:1px solid #ccc">
+<form action="add_category.php" method="POST" style="border:1px solid #ccc">
 	<div class="container">
-		<h1>Add product</h1>
+		<h1>Add category</h1>
 		<hr>
+
 
 		<label for="name"><b>Name</b></label>
 		<input type="text" placeholder="" name="name" required>
 
-		<label ><b>Descripton</b></label>
-		<input type="text" placeholder="" name="description" required>
+		<label for="description"><b>Description</b></label></br>
+		<textarea name="description" rows="10" cols="30">
+		</textarea> </br>
 
-		<label ><b>Price</b></label>
-		<input type="text" placeholder="" name="price" required>
 
-		<label for="category">Category</label></br>
-		<input type="text" placeholder="" name="category">
+		<label for="is_root"><b>Root</b></label></br>
+		<input type="number" placeholder="0" name="is_root" required></br>
+
+
+		<label for="parent_id"><b>Parent_id</b></label></br>
+		<input type="number" placeholder="0" name="parent_id" required></br>
 
 		<div class="clearfix">
 			<button id="button" type="submit" class="createbtn" value="OK">SUBMIT</button>

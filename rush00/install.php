@@ -8,31 +8,16 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'OK')
 		$password =  $_POST['pass'];
 		$dbname = $_POST['dbname'];
 		
-		$conn = new mysqli($servername, $username, $password);
+		$conn = mysqli_connect($servername, $username, $password);
 
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
 		else {
-			/* sql dump generation
-			$templine = '';
-			$lines = file("create_tables.sql");
-			foreach ($lines as $line)
-			{
-				if (substr($line, 0, 2) == '--' || $line == '')
-						continue;
-
-				$templine .= $line;
-				if (substr(trim($line), -1, 1) == ';')
-				{
-						mysqli_query($db, $templine);
-						$templine = '';
-				}
-			}*/
 
 			//Create database
-			$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+			$sql = "CREATE DATABASE IF NOT EXISTS ".$dbname.";";
 			if (mysqli_query($conn, $sql)) {
 				echo "";
 			} else {

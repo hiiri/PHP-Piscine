@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    		body {
+			margin-left: 20%;
+			margin-right: 10%;
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			text-align: left;
+			padding: 8px;
+		}
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+        
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+<h1>Edit users</h1>
+<table>
+		<tr>
+		<th>user_id</th>
+		<th>username</th> 
+		<th>realname</th>
+		<th>email</th>
+		<th>is admin</th>
+		<th>remove</th>
+		</tr><tr><td>1</td><td>12</td><td>3</td><td>3</td><td>0</td><td><a href="remove_user.php">X</a></td></tr><tr><td>2</td><td>12</td><td>3</td><td>3</td><td>0</td><td><a href="remove_user.php">X</a></td></tr><tr><td>3</td><td>asdf</td><td>asdf</td><td>asdf</td><td>0</td><td><a href="remove_user.php">X</a></td></tr></table></div>
+
+</body>
+</html>

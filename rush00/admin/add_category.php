@@ -15,26 +15,23 @@
 		die("User not authorized");
 ?>
 <?php
-	include '../connect.php';
+	include 'connect.php';
 
 	$name = $_POST['name'];
-	$description  = $_POST['description'];
-	$price = $_POST['price'];
-	$category = $_POST['category'];
+	$is_root  = $_POST['is_root'];
+	$parent_id = $_POST['parent_id'];
 
-	$sql = mysqli_query($conn, "SELECT * FROM `product`");
+	$sql = mysqli_query($conn, "SELECT * FROM `categories`");
 	while ($row = mysqli_fetch_array($sql)) {
 		if ($row['name'] == $name) {
-			echo "Productname is already in use";
+			echo "Categoryname is already in use";
 			die;
 		}
 	}
 	
-	$sql = "INSERT INTO `product` (name, description, price, category) VALUES ('$name', '$description', '$price', '$category')";
-	echo "$sql";
+	$sql = "INSERT INTO `categories` (name, is_root, parent_id) VALUES ('$name', '$is_root', '$parent_id')";
 	if ($conn->query($sql) === TRUE) {
 		echo "New record created successfully";
-		header('Location: list_products.php');
 	}
 	else
 	{

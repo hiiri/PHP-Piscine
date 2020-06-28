@@ -18,50 +18,49 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>List users</title>
+	<title>List categories</title>
 	<link rel="stylesheet" href="adminstyle.css">
-	<link rel="stylesheet" href="addstyle.css">
+	
 </head>
 <body>
 
 <ul>
-  <li><a class="active" href="list_users.php">Users</a></li>
+  <li><a href="list_users.php">Users</a></li>
   <li><a href="list_orders.php">Orders</a></li>
   <li><a href="list_products.php">Products</a></li>
-  <li><a href="edit_categories.php">Categories</a></li>
+  <li><a class="active" href="edit_categories.php">Categories</a></li>
 </ul>
-
 
 <div  style="border:1px solid #ccc">
 
-<h1>Users</h1>
+<h1>Edit categories</h1>
 <hr>
+<a href="add_category.html">Add new</a>
 <?php
 	include '../connect.php';
 
-	$sql = "SELECT user_id, username, realname, email, is_admin FROM user";
+	$sql = "SELECT category_id, name, is_root, parent_id FROM categories";
+	
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 		echo('<table>
 		<tr>
-		<th>user_id</th>
-		<th>username</th> 
-		<th>realname</th>
-		<th>email</th>
-		<th>is admin</th>
+		<th>category_id</th>
+		<th>name</th> 
+		<th>is_root</th>
+		<th>parent_id</th>
 		<th>remove</th>
 		</tr>');
 
 		while($row = $result->fetch_assoc())
 		{
 			echo('<tr>');
-			echo('<td>'. $row["user_id"].'</td>');
-			echo('<td>'. $row["username"].'</td>');
-			echo('<td>'. $row["realname"].'</td>');
-			echo('<td>'. $row["email"].'</td>');
-			echo('<td>'. $row["is_admin"].'</td>');
-			echo('<td><a href="remove_user.php?user_id='.$row["user_id"].' ":>X</a></td>');
+			echo('<td>'. $row["category_id"].'</td>');
+			echo('<td>'. $row["name"].'</td>');
+			echo('<td>'. $row["is_root"].'</td>');
+			echo('<td>'. $row["parent_id"].'</td>');
+			echo('<td><a href="remove_category.php">X</a></td>');
 			echo('</tr>');
 		}
 		echo('</table>');

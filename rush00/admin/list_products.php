@@ -20,48 +20,49 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>List users</title>
 	<link rel="stylesheet" href="adminstyle.css">
-	<link rel="stylesheet" href="addstyle.css">
+	
 </head>
 <body>
 
 <ul>
-  <li><a class="active" href="list_users.php">Users</a></li>
-  <li><a href="list_orders.php">Orders</a></li>
-  <li><a href="list_products.php">Products</a></li>
-  <li><a href="edit_categories.php">Categories</a></li>
+	<li><a href="list_users.php">Users</a></li>
+	<li><a href="list_orders.php">Orders</a></li>
+	<li><a class="active" href="list_products.php">Products</a></li>
+	<li><a href="edit_categories.php">Categories</a></li>
 </ul>
 
 
-<div  style="border:1px solid #ccc">
+<div style="border:1px solid #ccc">
 
-<h1>Users</h1>
+<h1>Products</h1>
 <hr>
+<a href="add_product.html">Add new</a>
 <?php
 	include '../connect.php';
 
-	$sql = "SELECT user_id, username, realname, email, is_admin FROM user";
+	$sql = "SELECT product_id, name, description, price, category FROM product";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 		echo('<table>
 		<tr>
-		<th>user_id</th>
-		<th>username</th> 
-		<th>realname</th>
-		<th>email</th>
-		<th>is admin</th>
+		<th>product_id</th>
+		<th>name</th> 
+		<th>description</th>
+		<th>price</th>
+		<th>category</th>
 		<th>remove</th>
 		</tr>');
 
 		while($row = $result->fetch_assoc())
 		{
 			echo('<tr>');
-			echo('<td>'. $row["user_id"].'</td>');
-			echo('<td>'. $row["username"].'</td>');
-			echo('<td>'. $row["realname"].'</td>');
-			echo('<td>'. $row["email"].'</td>');
-			echo('<td>'. $row["is_admin"].'</td>');
-			echo('<td><a href="remove_user.php?user_id='.$row["user_id"].' ":>X</a></td>');
+			echo('<td>'. $row["product_id"].'</td>');
+			echo('<td>'. $row["name"].'</td>');
+			echo('<td>'. $row["description"].'</td>');
+			echo('<td>'. $row["price"].'</td>');
+			echo('<td>'. $row["category"].'</td>');
+			echo('<td><a href="remove_product.php?product_id='.$row["product_id"].' ":>X</a></td>');
 			echo('</tr>');
 		}
 		echo('</table>');

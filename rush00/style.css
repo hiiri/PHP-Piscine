@@ -32,14 +32,17 @@ body {
     display: flex;                  /* establish flex container */
     flex-direction: row;            /* default value; can be omitted */
     flex-wrap: wrap;              /* default value; can be omitted */
-    pointer-events: none;
     padding-top: 150px;
     margin: 20px;
     width: 900px;
     position: absolute;
+    pointer-events: none;
     left: 250px;
     top:100px;
-    border: 4px black;
+}
+
+.product-box > form > button {
+    pointer-events: all !important;
 }
 
 img {
@@ -53,8 +56,11 @@ img {
     height: 200px;
     margin: 50px;
 }
-.product-box button {
 
+.basket {
+ 
+    padding-top: 150px;
+    position: absolute;
 }
 
 #nav {

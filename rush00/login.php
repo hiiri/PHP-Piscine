@@ -1,36 +1,37 @@
 <?php
-
 session_start();
+include 'connect.php';
+include_once 'functions.php';
 
-function auth($login, $passwd)
+$hash_algorithm = 'whirlpool';
+
+
+function auth($username, $password)
 {
-	$passwd_path = '../private/passwd';
-	$hash_algorithm = 'sha512';
+	/* Get hashed password for user from database */
+	include 'connect.php';
+	$query = 'SELECT PASSWORD FROM user where USERNAME="' . $username . '"';
+	$result = mysqli_query($conn, $query);
 
-	$data = unserialize(file_get_contents($passwd_path));
+	$stored_password = mysqli_fetch_array($result, MYSQLI_ASSOC)['PASSWORD'];
 
-	if (!$data)
-		return FALSE;
-	foreach ($data as $user)
-	{
-		if ($user['login'] === $login)
-		{
-			if ($user['passwd'] === hash($hash_algorithm, $passwd))
-			{
-				return TRUE;
-			}
-		}
-	}
+	if ($password === $stored_password)
+		return TRUE;
 	return FALSE;
 }
 
-$login = $_POST['login'];
-$passwd = $_POST['passwd'];
+$username = $_POST['login'];
+$password = hash($hash_algorithm, $_POST['password']);
 
-if (auth($login, $passwd))
+if (is_logged_in())
 {
-	$_SESSION['logged_on_user'] = $login;
-	echo "<p>Welcome, ".$login.".</p>";
+	die("<p>Already logged in.</p>");
+}
+
+if (auth($username, $password))
+{
+	$_SESSION['logged_on_user'] = $username;
+	echo "<p>Welcome, ".$username.".</p>";
 }
 else
 {

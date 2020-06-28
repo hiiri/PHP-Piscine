@@ -17,24 +17,30 @@
 <?php
 	include '../connect.php';
 
-	$name = $_POST['name'];
-	$description  = $_POST['description'];
-	$price = $_POST['price'];
-	$category = $_POST['category'];
+	/*
+	if (!isset($_SESSION['logged_in_user'])) {
+		
+		header("Location: google.com");
+		die;
+	}*/
 
+	//teskkaa onko admin
+
+	$user_id = $_GET['user_id'];
+
+    /*
 	$sql = mysqli_query($conn, "SELECT * FROM `product`");
 	while ($row = mysqli_fetch_array($sql)) {
 		if ($row['name'] == $name) {
 			echo "Productname is already in use";
 			die;
 		}
-	}
+	}*/
 	
-	$sql = "INSERT INTO `product` (name, description, price, category) VALUES ('$name', '$description', '$price', '$category')";
-	echo "$sql";
+	$sql = "DELETE FROM `user` WHERE user_id='$user_id'";
 	if ($conn->query($sql) === TRUE) {
 		echo "New record created successfully";
-		header('Location: list_products.php');
+		header('Location: list_users.php');
 	}
 	else
 	{
