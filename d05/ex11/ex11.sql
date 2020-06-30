@@ -1,9 +1,8 @@
-SELECT  upper(u.last_name) AS `NAME`,
-        u.first_name,
-        s.price
-    FROM user_card AS u
-    INNER JOIN member AS m ON m.id_member = u.id_user
-    INNER JOIN subscription AS s ON m.id_sub = s.id_sub
-    WHERE s.price > 42
-    ORDER BY last_name ASC, first_name ASC
-;
+SELECT upper(u.last_name) AS `NAME`, 
+    u.first_name, 
+    s.price 
+    FROM member AS m
+    INNER JOIN user_card AS u ON m.id_user_card = u.id_user
+    INNER JOIN subscription AS s ON s.id_sub = m.id_sub
+    WHERE price > 42 
+    ORDER BY u.last_name, u.first_name ASC;
