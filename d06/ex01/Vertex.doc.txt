@@ -1,4 +1,27 @@
 
 <- Vertex ----------------------------------------------------------------------
-Your documentation here.
+The Vertex class contains a representation of a vertex.
+It has these values:
+    - x, y, z coordinates, 
+    - w value for homogenous transformation, 
+    - color
+
+When constructing an instance, the 'x', 'y' and 'z' parameters are required.
+$vtx  = new Vertex( array( 'x' => 0.0, 'y' => 0.0, 'z' => 0.0 ) );
+
+The parameters 'w' and 'color' are optional.
+'color' must be a reference to an instance of the Color class.
+The default value of 'w' is 1.0.
+The default value of 'color' is white (RGB 0xffffff).
+$green = new Color( array( 'red' =>   0, 'green' => 255, 'blue' => 0 ) );
+new Vertex( array( 'x' => 1.0, 'y' => 0.0, 'z' => 0.0, 'w' => 3.0, 'color' => $green ) );
+
+The class provides get and set methods for 'x', 'y', 'z', 'w' and 'color':
+getX( $x );
+...
+getColor( Color $color );
+
+setX( $x );
+...
+setColor( Color $color );
 ---------------------------------------------------------------------- Vertex ->
