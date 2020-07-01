@@ -1,0 +1,35 @@
+
+<- Vector ----------------------------------------------------------------------
+The Vector class contains a representation of a vector.
+It uses the "right-hand" 3D system.
+It has these values:
+    - x, y, z magnitude, 
+    - w coordinate (which is always 0.0) considered as an arbitrary vector component
+
+When constructing an instance, an array with two parameters are expected: 
+    - 'dest' (the destination vertex, required)
+    - 'orig' (the origin vertex, optional)
+
+$vtxO = new Vertex( array( 'x' => 0.0, 'y' => 0.0, 'z' => 0.0 ) );
+$vtxX = new Vertex( array( 'x' => 1.0, 'y' => 0.0, 'z' => 0.0 ) );
+$vtcXunit = new Vector( array( 'orig' => $vtxO, 'dest' => $vtxX ) );
+
+If 'orig' is not provided, it will be set to a vertex with x=0, y=0, z=0, w=1.
+$vtcXunit2 = new Vector( array( 'dest' => $vtxX ) );
+
+The class provides these methods:
+    float magnitude() - returns the vector's length (or "norm")
+    Vector normalize() - returns a normalized version of the vector. If the vector is already normalized, returns a fresh copy of the vector.
+    Vector add( Vector $rhs ) - returns the sum vector of both vectors.
+    Vector sub( Vector $rhs ) - returns the difference vector of both vectors.
+    Vector opposite() - returns the opposite vector.
+    Vector scalarProduct( $k ) - returns the multiplication of the vector with a scalar.
+    float dotProduct( Vector $rhs ) - returns the scalar multiplication of both vectors.
+    float cos( Vector $rhs ) - returns the cosine of the angle between two vectors.
+    Vector crossProduct( Vector $rhs ) - returns the cross multiplication of both vectors (right-hand system!)
+    
+    Getters for x, y, z, w:
+    float   getX()
+    ...
+    float   getW()
+---------------------------------------------------------------------- Vector ->
