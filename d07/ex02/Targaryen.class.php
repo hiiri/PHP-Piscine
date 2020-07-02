@@ -6,7 +6,7 @@ class Targaryen {
     }
     
     public function getBurned() {
-        if ($this->resistsFire())
+        if (static::resistsFire())
             return "emerges naked but unharmed";    
         return "burns alive";
         }
