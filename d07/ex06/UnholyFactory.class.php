@@ -4,6 +4,14 @@ class UnholyFactory {
     private $fighters = [];
 
     public function absorb( $fighter ) {
+        foreach ($this->fighters as $already_member)
+        {
+            if (isset($fighter->type) && $fighter->type === $already_member->type)
+            {
+                print( '(Factory already absorbed a fighter of type ' . $fighter->type . ')' . PHP_EOL );
+                return;
+            }
+        }
         if (isset($fighter->type)) {
             $this->fighters[] = $fighter;
             print( '(Factory absorbed a fighter of type ' . $fighter->type . ')'. PHP_EOL );
