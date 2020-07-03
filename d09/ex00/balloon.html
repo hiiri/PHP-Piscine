@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #balloon {
+                background-color: red;
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="balloon" onclick="grow()">
+            
+        </div>
+
+        <script>
+            var balloon = document.getElementById("balloon");
+            var size = document.getElementById("balloon").clientHeight;
+            var colorSequence = ['red','green','blue'];
+            var clicked = false;
+            var i = 0;
+            var a;
+
+            balloon.addEventListener("mouseleave", mouseLeave);
+            function grow() {
+                clicked = true;
+                size += 10;
+                balloon.style.height = size + "px";
+                balloon.style.width = size + "px";
+                if (size > 420)
+                    returnToOriginalSize();
+                i++;
+                a = (i % colorSequence.length + colorSequence.length) % colorSequence.length;
+                balloon.style.backgroundColor = colorSequence[a];
+                
+            }
+            function mouseLeave() {
+                if (clicked)
+                {
+                    clicked = false;
+                    return;
+                }
+                if (size >= 205)
+                {
+                    size -= 5;
+                    balloon.style.height = size + "px";
+                    balloon.style.width = size + "px";
+                }
+                i--;
+                a = (i % colorSequence.length + colorSequence.length) % colorSequence.length;
+                balloon.style.backgroundColor = colorSequence[a];
+            }
+            function returnToOriginalSize() {
+                size = 200;
+                balloon.style.height = size + "px";
+                balloon.style.width = size + "px";
+            }
+        </script>
+    </body>
+</html>
