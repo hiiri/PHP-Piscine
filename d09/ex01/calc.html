@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <form onsubmit="return false">
+            <input action="" type="text" id="left-number">
+            <select name="operator" id="operator-menu">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+                <option value="%">%</option>
+            </select>
+            <input type="text" id="right-number"><br>
+            <input type="submit" value="Try me!" id="submit-button">
+        </form>
+        <script>
+            var left = document.getElementById("left-number");
+            var right = document.getElementById("right-number");
+            var operator = document.getElementById("operator-menu");
+            var button = document.getElementById("submit-button")
+            button.addEventListener("click", doOperation);
+            window.setInterval(function() {alert("Please, use me...");}, 30000);
+
+            function doOperation() {
+                var leftNum;
+                var rightNum;
+                var op = operator.value;
+                var res;
+
+                if (inputIsPositiveInteger(left.value) && inputIsPositiveInteger(right.value)) {
+                    leftNum = parseInt(left.value);
+                    rightNum = parseInt(right.value);
+                } else {
+                    alert("Error :(");
+                    return;
+                }
+
+                switch(op) {
+                    case '+':
+                        res = add(leftNum, rightNum);
+                        break;
+                    case '-':
+                        res = sub(leftNum, rightNum);
+                        break;
+                    case '*':
+                        res = mult(leftNum, rightNum);
+                        break;
+                    case '/':
+                        res = div(leftNum, rightNum);
+                        break;
+                    case '%':
+                        res = mod(leftNum, rightNum);
+                }
+                console.log(res);
+                alert(res);
+            }
+
+            function inputIsPositiveInteger(x) {
+                return x == parseInt(x, 10) && x >= 0;
+            }
+
+            function add(a, b) {
+                return (a + b);
+            }
+
+            function sub(a, b) {
+                return (a - b);
+            }
+
+            function mult(a, b) {
+                return (a * b);
+            }
+
+            function div(a, b) {
+                if (b == 0)
+                    return "It's over 9000!";
+                return (a / b);
+            }
+
+            function mod(a, b) {
+                if (b == 0)
+                    return "It's over 9000!";
+                return (a % b);
+            }
+</script>
+
+        </script>
+    </body>
+</html>
